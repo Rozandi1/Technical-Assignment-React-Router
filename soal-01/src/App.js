@@ -11,10 +11,10 @@ export default function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="*" /> {/* Route jika URL path yang dicari tidak ada dan akan menuju component Not Found */}
-          <Route path="/movies/:id" /> {/* Route movie dengan id Param yang akan menuju ke halaman pada component pages/Movie */}
-          <Route path="/" /> {/* Route homepage yang akan menuju ke halaman pada component pages/Home */}
-          <Route path="/movies" /> {/* Route movies yang akan menuju ke halaman pada component pages/MovieList */}
+          <Route path="*" element={<NotFound />} /> {/* Route jika URL path yang dicari tidak ada dan akan menuju component Not Found */}
+          <Route path="/movies/:id" element={<Movie />} /> {/* Route movie dengan id Param yang akan menuju ke halaman pada component pages/Movie */}
+          <Route path="/" element={<Home />} /> {/* Route homepage yang akan menuju ke halaman pada component pages/Home */}
+          <Route path="/movies" element={<MovieList />} /> {/* Route movies yang akan menuju ke halaman pada component pages/MovieList */}
         </Routes>
       </div>
     </>
