@@ -1,12 +1,11 @@
 import { useState } from "react";
-import qs from "qs";
 import { useHistory, useLocation } from "react-router-dom";
 
 const MovieListFilter = () => {
   const location = useLocation;
   const history = useHistory;
   // Variable yang akan menampung parameter yang telah diberikan oleh user
-  const params = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const params = {Movie};
 
   const shows = [10, 20, 30];
   const categories = ["TV", "Movie"];

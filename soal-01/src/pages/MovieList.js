@@ -1,7 +1,6 @@
 import MovieCard from "../components/MovieCard";
 import MovieListFilter from "../components/MovieListFilter";
 import useLocation from "react-router-dom";
-import qs from "qs";
 
 import movies from "../dummy-data";
 
@@ -13,21 +12,13 @@ const MovieList = () => {
   const fields = ["title", "score"];
 
   // Variable yang akan menampung parameter yang telah diberikan oleh user
-  const params = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const params = { movies };
 
   // Variable yang kita gunakan untuk melakukan penyaringan data
-  const filter = {
-    show: params.show || shows[0],
-    category: params.category || categories[0],
-    sort: params.sort || fields[0],
-  };
+  const filter = { movies };
 
   // Variable yang akan menyimpan data-data yang sudah difilter menggunakan variable filter diatas
-  const filteredMovies = movies
-    .filter((o) => o.type === filter.category)
-    .sort((a, b) => (a[filter.sort] > b[filter.sort] ? -1 : 1))
-    .slice(0, filter.show);
-
+  const filteredMovies = movies;
   return (
     <div className="row">
       <MovieListFilter />
