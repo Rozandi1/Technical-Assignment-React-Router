@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const MovieListFilter = () => {
-  const location = useLocation;
-  const history = useHistory;
   // Variable yang akan menampung parameter yang telah diberikan oleh user
-  const params = {Movie};
+  const params = useParams();
 
   const shows = [10, 20, 30];
   const categories = ["TV", "Movie"];
