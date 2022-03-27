@@ -1,16 +1,21 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import qs from "qs";
 
 const MovieListFilter = () => {
   // Variable yang akan menampung parameter yang telah diberikan oleh user
-  const params = {};
+  const location = useLocation();
+  const navigate = useNavigate();
+  // const history = useHistory();
+  const params = qs.parse(location.search, { ignoreQueryPrefix: true });
 
   const shows = [10, 20, 30];
   const categories = ["TV", "Movie"];
   const fields = ["title", "score"];
 
-  const [show, setShow] = useState(shows[0]);
-  const [category, setCategory] = useState(categories[0]);
-  const [sortBy, setSortBy] = useState(fields[0]);
+  const [show, setShow] = useState(params.show || shows[0]);
+  const [category, setCategory] = useState(params.category || categories[0]);
+  const [sortBy, setSortBy] = useState(params.sort || fields[0]);
   return (
     <div className="col-12 my-5">
       <div className="row align-items-stretch justify-content-center">
@@ -18,13 +23,7 @@ const MovieListFilter = () => {
           <label htmlFor="category" className="form-label">
             Category
           </label>
-          <select
-            id="category"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={(e) => setCategory(e.target.value)}
-            defaultValue={category}
-          >
+          <select id="category" className="form-select" aria-label="Default select example" onChange={(e) => setCategory(e.target.value)} defaultValue={category}>
             {categories.map((c, id) => (
               <option key={id} value={c}>
                 {c}
@@ -36,13 +35,7 @@ const MovieListFilter = () => {
           <label htmlFor="show" className="form-label">
             Show
           </label>
-          <select
-            id="show"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={(e) => setShow(e.target.value)}
-            defaultValue={show}
-          >
+          <select id="show" className="form-select" aria-label="Default select example" onChange={(e) => setShow(e.target.value)} defaultValue={show}>
             {shows.map((s, id) => (
               <option key={id} value={s}>
                 {s}
@@ -54,13 +47,7 @@ const MovieListFilter = () => {
           <label htmlFor="show" className="form-label">
             Sort By
           </label>
-          <select
-            id="show"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={(e) => setSortBy(e.target.value)}
-            defaultValue={sortBy}
-          >
+          <select id="show" className="form-select" aria-label="Default select example" onChange={(e) => setSortBy(e.target.value)} defaultValue={sortBy}>
             {fields.map((f, id) => (
               <option key={id} value={f}>
                 {f}
@@ -69,7 +56,7 @@ const MovieListFilter = () => {
           </select>
         </div>
         <div className="col-2 row align-items-end">
-          <button id="submit" className="btn btn-outline-success">
+          <button id="submit" className="btn btn-outline-success" onClick={() => navigate(`/movies/?show=${show}&category=${category}&sort=${sortBy}`)}>
             submit
           </button>
         </div>
